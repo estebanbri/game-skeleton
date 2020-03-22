@@ -1,15 +1,15 @@
 package com.state;
 
 import com.main.GamePanel;
-import com.manager.GameStateManager;
+import com.manager.StateManager;
 
 import java.awt.*;
 
-public class OptionesState extends GameState {
+public class OptionesState extends AbstractGameState {
 
 
 
-    public OptionesState(GameStateManager gsm) {
+    public OptionesState(StateManager gsm) {
         super(gsm);
     }
 

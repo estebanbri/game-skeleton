@@ -1,24 +1,22 @@
 package com.state;
 
 import com.main.GamePanel;
-import com.manager.GameStateManager;
+import com.manager.StateManager;
 import com.manager.KeyManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class IntroState extends GameState {
+public class IntroState extends AbstractGameState {
 
     private BufferedImage logo;
 
     private int ticks;
 
-    private final int LENGTH = 60;
+    private final int MAX_TICKS = 60;
 
-
-
-    public IntroState(GameStateManager gsm) {
+    public IntroState(StateManager gsm) {
         super(gsm);
     }
 
@@ -37,8 +35,8 @@ public class IntroState extends GameState {
     public void update() {
         handleInput();
         ticks++;
-        if(ticks > LENGTH ) {
-            gsm.changeState(GameStateManager.MENU);
+        if(ticks > MAX_TICKS ) {
+            gsm.changeState(StateManager.MENU);
         }
     }
 
@@ -50,7 +48,7 @@ public class IntroState extends GameState {
     @Override
     public void handleInput() {
         if(KeyManager.isPressed(KeyManager.ENTER)) {
-            gsm.changeState(GameStateManager.MENU);
+            gsm.changeState(StateManager.MENU);
         }
     }
 }

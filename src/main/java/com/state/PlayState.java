@@ -1,30 +1,31 @@
 package com.state;
 
+import com.component.Position;
 import com.entity.Player;
 import com.main.GamePanel;
-import com.manager.GameStateManager;
+import com.manager.StateManager;
 import com.manager.KeyManager;
 
 import java.awt.*;
 
-public class PlayState extends GameState {
+public class PlayState extends AbstractGameState {
 
     private Player player;
 
-    public PlayState(GameStateManager gsm) {
+    public PlayState(StateManager gsm) {
         super(gsm);
     }
 
     @Override
     public void init() {
         player = new Player();
-        player.setPosition(17, 17);
+        player.setPosition(new Position(17,17));
     }
 
     @Override
     public void update() {
-        player.update();
         handleInput();
+        player.update(); // actualiza el conjunto de imagenes dependiendo de la tecla pulsada
     }
 
     @Override

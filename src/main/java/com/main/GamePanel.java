@@ -1,6 +1,6 @@
 package com.main;
 
-import com.manager.GameStateManager;
+import com.manager.StateManager;
 import com.manager.KeyManager;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private Graphics2D g;
 
     // game state manager
-    private GameStateManager gsm;
+    private StateManager gsm;
 
     // constructor
     public GamePanel() {
@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements KeyListener {
         running = true;
         image = new BufferedImage(WIDTH, HEIGHT, 1);
         g = (Graphics2D) image.getGraphics();
-        gsm = new GameStateManager();
+        gsm = new StateManager();
 
         // variables usadas para controlar los tiempos de inicio y fin del gameloop y dormir el thread cuando sea necesario dependienco de los fps
         long start;

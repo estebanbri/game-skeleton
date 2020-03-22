@@ -4,54 +4,48 @@ import java.awt.image.BufferedImage;
 
 public class Animation {
 
+    // stuff images anim
     private BufferedImage[] frames;
     private int currentFrame;
-    private int numFrames;
 
-    private int count;
+    // stuff to control when change next image animation
+    private int ticks;
     private int delay;
-
-    private int timesPlayed;
-
-    public Animation() {
-        timesPlayed = 0;
-    }
 
     public void setFrames(BufferedImage[] frames) {
         this.frames = frames;
         currentFrame = 0;
-        count = 0;
-        timesPlayed = 0;
+        ticks = 0;
         delay = 2;
-        numFrames = frames.length;
     }
 
-    public void setDelay(int i) { delay = i; }
-    public void setFrame(int i) { currentFrame = i; }
-    public void setNumFrames(int i) { numFrames = i; }
 
     public void update() { // finalidad: actualizar al siguiente indice de la siguiente imagen a mostrar
 
-        if(delay == -1) return;
+        if(delay == -1) return; // check si es -1 es una unica imagen
 
-        count++;
+        ticks++;
 
-        if(count == delay) {
+        if(ticks == delay) { // si la imagen se mostro en pantalla durante este delay
             currentFrame++;  // siguiente imagen index
-            count = 0; // resetea count para que pase la misma cantidad de tiempo en cada vuelta
+            ticks = 0; // resetea count para que pase la misma cantidad de tiempo en cada vuelta
         }
-        if(currentFrame == numFrames) {  // si el frame actual es el ultimo frame reseteamos los contadores para que repita la segunda de la animacion
+        if(currentFrame == frames.length) {  // si el frame actual es el ultimo frame reseteamos los contadores para que repita la segunda de la animacion
             currentFrame = 0;
-            timesPlayed++; // contador de cantidad de veces que se completo las n imagenes de la animacion completa
         }
 
     }
 
 
-    public BufferedImage getImage() { return frames[currentFrame]; }
+    public BufferedImage getCurrentImage() {
+        return frames[currentFrame];
+    }
 
-    public int getFrame() { return currentFrame; }
-    public int getCount() { return count; }
-    public boolean hasPlayedOnce() { return timesPlayed > 0; }
-    public boolean hasPlayed(int i) { return timesPlayed == i; }
+    public void setDelay(int i) { delay = i; }
+
+//    public void setFrame(int i) { currentFrame = i; }
+//    public int getFrame() { return currentFrame; }
+//    public int getTicks() { return ticks; }
+//    public boolean hasPlayedOnce() { return timesPlayed > 0; }
+//    public boolean hasPlayed(int i) { return timesPlayed == i; }
 }

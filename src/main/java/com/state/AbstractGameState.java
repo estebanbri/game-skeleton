@@ -1,15 +1,15 @@
 package com.state;
 
 
-import com.manager.GameStateManager;
+import com.manager.StateManager;
 
 import java.awt.*;
 
-public abstract class GameState {
+public abstract class AbstractGameState {
 
-     protected GameStateManager gsm;
+     protected StateManager gsm;
 
-     public GameState(GameStateManager gsm){
+     public AbstractGameState(StateManager gsm){
           this.gsm = gsm;
      }
 

@@ -1,12 +1,12 @@
 package com.state;
 
-import com.manager.GameStateManager;
+import com.manager.StateManager;
 
 import java.awt.*;
 
-public class GameOverState extends GameState {
+public class GameOverState extends AbstractGameState {
 
-    public GameOverState(GameStateManager gsm) {
+    public GameOverState(StateManager gsm) {
         super(gsm);
     }
 

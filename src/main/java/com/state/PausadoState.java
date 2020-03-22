@@ -1,14 +1,14 @@
 package com.state;
 
-import com.manager.Content;
-import com.manager.GameStateManager;
+import com.manager.AssetManager;
+import com.manager.StateManager;
 import com.manager.KeyManager;
 
 import java.awt.*;
 
-public class PausadoState extends GameState {
+public class PausadoState extends AbstractGameState {
 
-    public PausadoState(GameStateManager gsm){
+    public PausadoState(StateManager gsm){
         super(gsm);
     }
 
@@ -24,18 +24,18 @@ public class PausadoState extends GameState {
 
     @Override
     public void draw(Graphics2D g) {
-        Content.drawString(g, "paused", 40, 30);
+        AssetManager.drawString(g, "paused", 40, 30);
 
-        Content.drawString(g, "arrow", 12, 76);
-        Content.drawString(g, "keys", 16, 84);
-        Content.drawString(g, ": move", 52, 80);
+        AssetManager.drawString(g, "arrow", 12, 76);
+        AssetManager.drawString(g, "keys", 16, 84);
+        AssetManager.drawString(g, ": move", 52, 80);
 
-        Content.drawString(g, "space", 12, 96);
-        Content.drawString(g, ": action", 52, 96);
+        AssetManager.drawString(g, "space", 12, 96);
+        AssetManager.drawString(g, ": action", 52, 96);
 
-        Content.drawString(g, "F1:", 36, 112);
-        Content.drawString(g, "return", 68, 108);
-        Content.drawString(g, "to menu", 68, 116);
+        AssetManager.drawString(g, "F1:", 36, 112);
+        AssetManager.drawString(g, "return", 68, 108);
+        AssetManager.drawString(g, "to menu", 68, 116);
     }
 
     @Override

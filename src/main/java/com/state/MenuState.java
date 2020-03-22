@@ -1,13 +1,13 @@
 package com.state;
 
-import com.manager.Content;
-import com.manager.GameStateManager;
+import com.manager.AssetManager;
+import com.manager.StateManager;
 import com.manager.KeyManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MenuState extends GameState {
+public class MenuState extends AbstractGameState {
 
     private BufferedImage background;
     private int currentOpcion;
@@ -16,13 +16,13 @@ public class MenuState extends GameState {
             "QUIT"
     };
 
-    public MenuState(GameStateManager gsm) {
+    public MenuState(StateManager gsm) {
         super(gsm);
     }
 
     @Override
     public void init() {
-        background = Content.MENUBACKGROUND[0][0];
+        background = AssetManager.MENUBACKGROUND[0][0];
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MenuState extends GameState {
     @Override
     public void draw(Graphics2D g) {
         g.drawImage(background, 0 ,0 , null);
-        Content.drawString(g, "JUGAR", 44, 90);
+        AssetManager.drawString(g, "JUGAR", 44, 90);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MenuState extends GameState {
 
     private void selectOption() {
         switch (currentOpcion){
-            case 0 : gsm.changeState(GameStateManager.PLAY); break;
+            case 0 : gsm.changeState(StateManager.PLAY); break;
             case 1 : System.exit(0); break;
         }
     }

@@ -1,99 +1,111 @@
 package com.entity;
 
+import com.component.Position;
 import java.awt.*;
 
 public abstract class Entity {
 
-    // Dimensiones
-    protected int width;
-    protected int heigth;
-    protected int cwidth;
-    protected int cheigth;
+  // Dimensiones
+  protected int width;
+  protected int heigth;
+  protected int collisionWidth;
+  protected int collisionHeigth;
 
-    // Posicion
-    protected int x;
-    protected int y;
-    protected int dx;
-    protected int dy;
+  // Posicion
+  protected Position currentPosition;
+  protected Position newPosition;
 
-    // Movimientos
-    protected  boolean moving;
-    protected boolean up;
-    protected boolean down;
-    protected  boolean left;
-    protected boolean right;
+  // Movimientos
+  protected boolean moving;
+  protected boolean up;
+  protected boolean down;
+  protected boolean left;
+  protected boolean right;
 
-    // Atributos
-    protected int moveSpeed;
+  // Atributos
+  protected int moveSpeed;
 
-    // Animation
-    protected Animation animation;
-    protected int currentAnimation;
+  // Animation
+  protected Animation animation;
+  protected int currentAnimation;
 
-    public Entity(){
-        animation = new Animation();
+  public Entity() {
+    animation = new Animation();
+    currentPosition = new Position();
+    newPosition = new Position();
+  }
+
+  public void setPosition(Position position) {
+    final int x = position.getX();
+    final int y = position.getY();
+    currentPosition.setX(x);
+    currentPosition.setY(y);
+    newPosition.setX(x);
+    newPosition.setY(y);
+  }
+
+  public void left() {
+    moving = true;
+    left = true;
+  }
+
+  public void rigth() {
+    moving = true;
+    right = true;
+  }
+
+  public void up() {
+    moving = true;
+    up = true;
+  }
+
+  public void down() {
+    moving = true;
+    down = true;
+  }
+
+  public void update() { // movimiento + seleccionar animacion
+
+    if (moving) {
+      if (left) {
+        int x = currentPosition.getX() - moveSpeed;
+        currentPosition.setX(x);
+        left = false;
+      }
+      if (right) {
+        int x = currentPosition.getX() + moveSpeed;
+        currentPosition.setX(x);
+        right = false;
+      }
+      if (up) {
+        int y = currentPosition.getY() - moveSpeed;
+        currentPosition.setY(y);
+        up = false;
+      }
+      if (down) {
+        int y = currentPosition.getY() + moveSpeed;
+        currentPosition.setY(y);
+        down = false;
+      }
     }
 
-    public void setPosition(int i1, int i2) {
-        x = dx = i1;
-        y = dy = i2;
+    boolean hasNotMoved = currentPosition.getX() == newPosition.getX() && currentPosition.getY() == newPosition.getY();
+    if (hasNotMoved) {
+      moving = false;
     }
 
-    public void left() {
-        moving = true;
-        left = true;
-    }
-    public void rigth() {
-        moving = true;
-        right = true;
-    }
-    public void up() {
-        moving = true;
-        up = true;
-    }
-    public void down() {
-        moving = true;
-        down = true;
-    }
+    // update animation
+    animation.update(); // finalidad: actualizar al siguiente indice de la siguiente imagen a mostrar
 
-    public void update() { // movimiento + seleccionar animacion
+  }
 
-        if(moving){
-            if(left){
-                x -= moveSpeed;
-                left = false;
-            }
-            if(right){
-                x += moveSpeed;
-                right = false;
-            }
-            if(up){
-                y -= moveSpeed;
-                up = false;
-            }
-            if(down){
-                y += moveSpeed;
-                down = false;
-            }
-        }
-
-        boolean hasNotMoved = x == dx && y == dy;
-        if(hasNotMoved){
-            moving = false;
-        }
-
-        // update animation
-        animation.update(); // finalidad: actualizar al siguiente indice de la siguiente imagen a mostrar
-
-    }
-
-    // Draws the entity.
-    public void draw(Graphics2D g) {
-        g.drawImage(
-                animation.getImage(),      // pinta la imagen actual del set de imaginacion
-                x  - width / 2,
-                y  - heigth / 2,
-                null
-        );
-    }
+  // Draws the entity.
+  public void draw(Graphics2D g) {
+    g.drawImage(
+        animation.getCurrentImage(),      // pinta la imagen actual del set de imaginacion
+        currentPosition.getX(),
+        currentPosition.getY(),
+        null
+    );
+  }
 }

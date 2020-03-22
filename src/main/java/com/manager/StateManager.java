@@ -4,14 +4,13 @@ import com.state.*;
 
 import java.awt.*;
 
-public class GameStateManager {
+public class StateManager {
 
     private boolean paused;
     private PausadoState pauseState;
 
-    private GameState[] gameStates;
+    private AbstractGameState[] gameStates;
     private int currentState;
-    private int previousState;
 
     public static final int NUM_STATES = 5;
     public static final int INTRO = 0;
@@ -20,19 +19,19 @@ public class GameStateManager {
     public static final int GAMEOVER = 3;
     public static final int OPCIONES = 4;
 
-    public GameStateManager() {
+    public StateManager() {
 
         paused = false;
         pauseState = new PausadoState(this);
 
-        gameStates = new GameState[NUM_STATES];
+        gameStates = new AbstractGameState[NUM_STATES];
         changeState(INTRO);
 
     }
 
     public void changeState(int i) {
-        previousState = currentState;
-        unloadState(previousState);
+        int previousState = currentState;
+        unloadState(previousState);  // asignamos null a la ubicacion del state previo antes de actualizar el nuevo index de state nuevo
         currentState = i;
         switch (i){
             case INTRO :
