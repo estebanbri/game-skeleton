@@ -70,7 +70,7 @@ public class Player extends Entity {
     }
 
     // update position
-    super.update();  // movimiento + seleccionar animacion
+    super.update();  // actualizar movimiento + actualizar imagen de la animacion
 
   }
 
