@@ -13,10 +13,14 @@ public class Animation {
     private int delay;
 
     public void setFrames(BufferedImage[] frames) {
+        setFrames(frames, 2);
+    }
+
+    public void setFrames(BufferedImage[] frames, int delay) {
         this.frames = frames;
-        currentFrame = 0;
-        ticks = 0;
-        delay = 2;
+        this.currentFrame = 0;
+        this.ticks = 0;
+        this.delay = delay;
     }
 
 

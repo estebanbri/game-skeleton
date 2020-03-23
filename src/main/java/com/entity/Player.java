@@ -1,5 +1,9 @@
 package com.entity;
 
+import com.entity.command.impl.DownCommand;
+import com.entity.command.impl.LeftCommand;
+import com.entity.command.impl.RightCommand;
+import com.entity.command.impl.UpCommand;
 import com.manager.AssetManager;
 
 import java.awt.image.BufferedImage;
@@ -31,37 +35,39 @@ public class Player extends GameActor {
     rightSprites = AssetManager.PLAYER[RIGHT];
     upSprites = AssetManager.PLAYER[UP];
 
-    animation.setFrames(downSprites);
-    animation.setDelay(10);
+    animation.setFrames(downSprites, 10);
   }
 
 
   public void update() {
 
-    // set animation
-    if (down) {
-      if (currentAnimation != DOWN) { // esta validacion es para que si la animacion ya esta apuntando para abajo no hacemos que setee de neuvo el set de imagenes
-        currentAnimation = DOWN;
-        setGraphics(downSprites, 10);
+    if(this.getCurrentCommand() != null){
+      // set animation
+      if (this.getCurrentCommand().getClass() == DownCommand.class) {
+        if (currentAnimation != DOWN) { // esta validacion es para que si la animacion ya esta apuntando para abajo no hacemos que setee de neuvo el set de imagenes
+          currentAnimation = DOWN;
+          animation.setFrames(downSprites, 10);
+        }
       }
-    }
-    if (left) {
-      if (currentAnimation != LEFT) {
-        currentAnimation = LEFT;
-        setGraphics(leftSprites, 10);
+      if (this.getCurrentCommand().getClass() == LeftCommand.class) {
+        if (currentAnimation != LEFT) {
+          currentAnimation = LEFT;
+          animation.setFrames(leftSprites, 10);
+        }
       }
-    }
-    if (right) {
-      if (currentAnimation != RIGHT) {
-        currentAnimation = RIGHT;
-        setGraphics(rightSprites, 10);
+      if (this.getCurrentCommand().getClass() == RightCommand.class) {
+        if (currentAnimation != RIGHT) {
+          currentAnimation = RIGHT;
+          animation.setFrames(rightSprites, 10);
+        }
       }
-    }
-    if (up) {
-      if (currentAnimation != UP) {
-        currentAnimation = UP;
-        setGraphics(upSprites, 10);
+      if (this.getCurrentCommand().getClass() == UpCommand.class) {
+        if (currentAnimation != UP) {
+          currentAnimation = UP;
+          animation.setFrames(upSprites, 10);
+        }
       }
+      cleanCurrentCommand();
     }
 
     // update position
@@ -69,10 +75,6 @@ public class Player extends GameActor {
 
   }
 
-  private void setGraphics(BufferedImage[] frames, int delay){
-    animation.setFrames(frames);
-    animation.setDelay(delay);
-  }
 
 }
 

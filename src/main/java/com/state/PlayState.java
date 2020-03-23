@@ -1,6 +1,7 @@
 package com.state;
 
 import com.component.Position;
+import com.entity.GameActor;
 import com.entity.Player;
 import com.entity.command.Command;
 import com.entity.command.impl.DownCommand;
@@ -8,10 +9,14 @@ import com.entity.command.impl.LeftCommand;
 import com.entity.command.impl.RightCommand;
 import com.entity.command.impl.UpCommand;
 import com.main.GamePanel;
+import com.manager.DrawerManager;
 import com.manager.StateManager;
 import com.manager.KeyManager;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.awt.*;
 
 public class PlayState extends AbstractGameState {
 
@@ -20,6 +25,8 @@ public class PlayState extends AbstractGameState {
     private Command rightCommand;
     private Command upCommand;
     private Command downCommand;
+
+    private DrawerManager drawerManager;
 
     public PlayState(StateManager gsm) {
         super(gsm);
@@ -33,6 +40,8 @@ public class PlayState extends AbstractGameState {
         rightCommand = new RightCommand();
         upCommand = new UpCommand();
         downCommand = new DownCommand();
+        drawerManager = new DrawerManager();
+        drawerManager.addGameActor(player);
     }
 
     @Override
@@ -48,7 +57,7 @@ public class PlayState extends AbstractGameState {
     public void draw(Graphics2D g) {
         g.setColor(Color.GRAY);
         g.fillRect(0,0, GamePanel.WIDTH, GamePanel.HEIGHT);
-        player.draw(g);
+        drawerManager.draw(g);
     }
 
     @Override
@@ -61,4 +70,5 @@ public class PlayState extends AbstractGameState {
         // Nothing Pressed
         return null;
     }
+
 }

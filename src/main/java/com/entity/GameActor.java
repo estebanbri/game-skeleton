@@ -1,6 +1,7 @@
 package com.entity;
 
 import com.component.Position;
+import com.entity.command.Command;
 import java.awt.*;
 
 public abstract class GameActor {
@@ -16,11 +17,7 @@ public abstract class GameActor {
   protected Position newPosition;
 
   // Movimientos
-  protected boolean moving;
-  protected boolean up;
-  protected boolean down;
-  protected boolean left;
-  protected boolean right;
+  protected Command currentCommand;
 
   // Atributos
   protected int moveSpeed;
@@ -44,55 +41,9 @@ public abstract class GameActor {
     newPosition.setY(y);
   }
 
-
-  public void rigth() {
-    moving = true;
-    right = true;
-  }
-
-  public void up() {
-    moving = true;
-    up = true;
-  }
-
-  public void down() {
-    moving = true;
-    down = true;
-  }
-
-  public void update() { // movimiento + seleccionar animacion
-
-    if (moving) {
-      if (left) {
-        int x = currentPosition.getX() - moveSpeed;
-        currentPosition.setX(x);
-        left = false;
-      }
-      if (right) {
-        int x = currentPosition.getX() + moveSpeed;
-        currentPosition.setX(x);
-        right = false;
-      }
-      if (up) {
-        int y = currentPosition.getY() - moveSpeed;
-        currentPosition.setY(y);
-        up = false;
-      }
-      if (down) {
-        int y = currentPosition.getY() + moveSpeed;
-        currentPosition.setY(y);
-        down = false;
-      }
-    }
-
-    boolean hasNotMoved = currentPosition.getX() == newPosition.getX() && currentPosition.getY() == newPosition.getY();
-    if (hasNotMoved) {
-      moving = false;
-    }
-
+  public void update() { // seleccionar animacion
     // update animation
     animation.update(); // finalidad: actualizar al siguiente indice de la siguiente imagen a mostrar
-
   }
 
   // Draws the entity.
@@ -105,43 +56,14 @@ public abstract class GameActor {
     );
   }
 
-  public boolean isMoving() {
-    return moving;
-  }
+  // Getters & Setters
 
-  public void setMoving(boolean moving) {
-    this.moving = moving;
+  public Command getCurrentCommand() { return currentCommand; }
+  public void setCurrentCommand(Command command) { this.currentCommand = command; }
+  public void cleanCurrentCommand(){
+    this.currentCommand = null;
   }
-
-  public boolean isUp() {
-    return up;
-  }
-
-  public void setUp(boolean up) {
-    this.up = up;
-  }
-
-  public boolean isDown() {
-    return down;
-  }
-
-  public void setDown(boolean down) {
-    this.down = down;
-  }
-
-  public boolean isLeft() {
-    return left;
-  }
-
-  public void setLeft(boolean left) {
-    this.left = left;
-  }
-
-  public boolean isRight() {
-    return right;
-  }
-
-  public void setRight(boolean right) {
-    this.right = right;
-  }
+  public Position getCurrentPosition() { return currentPosition; }
+  public void setCurrentPosition(Position currentPosition) { this.currentPosition = currentPosition; }
+  public int getMoveSpeed() { return moveSpeed; }
 }
