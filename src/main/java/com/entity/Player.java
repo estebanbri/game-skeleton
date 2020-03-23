@@ -40,38 +40,38 @@ public class Player extends Entity {
 
     // set animation
     if (down) {
-      if (currentAnimation
-          != DOWN) { // esta validacion es para que si la animacion ya esta apuntando para abajo no hacemos que setee de neuvo el set de imagenes
+      if (currentAnimation != DOWN) { // esta validacion es para que si la animacion ya esta apuntando para abajo no hacemos que setee de neuvo el set de imagenes
         currentAnimation = DOWN;
-        animation.setFrames(downSprites);
-        animation.setDelay(10);
+        setGraphics(downSprites, 10);
       }
     }
     if (left) {
       if (currentAnimation != LEFT) {
         currentAnimation = LEFT;
-        animation.setFrames(leftSprites);
-        animation.setDelay(10);
+        setGraphics(leftSprites, 10);
       }
     }
     if (right) {
       if (currentAnimation != RIGHT) {
         currentAnimation = RIGHT;
-        animation.setFrames(rightSprites);
-        animation.setDelay(10);
+        setGraphics(rightSprites, 10);
       }
     }
     if (up) {
       if (currentAnimation != UP) {
         currentAnimation = UP;
-        animation.setFrames(upSprites);
-        animation.setDelay(10);
+        setGraphics(upSprites, 10);
       }
     }
 
     // update position
     super.update();  // actualizar movimiento + actualizar imagen de la animacion
 
+  }
+
+  private void setGraphics(BufferedImage[] frames, int delay){
+    animation.setFrames(frames);
+    animation.setDelay(delay);
   }
 
 }
