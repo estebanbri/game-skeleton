@@ -1,6 +1,7 @@
 package com.state;
 
 
+import com.entity.command.Command;
 import com.manager.StateManager;
 
 import java.awt.*;
@@ -16,5 +17,5 @@ public abstract class AbstractGameState {
      public abstract void init();
      public abstract void update();
      public abstract void draw(Graphics2D g);
-     public abstract void handleInput();
+     public abstract Command handleInput();
 }

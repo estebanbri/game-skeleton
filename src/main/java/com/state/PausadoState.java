@@ -1,5 +1,6 @@
 package com.state;
 
+import com.entity.command.Command;
 import com.manager.AssetManager;
 import com.manager.StateManager;
 import com.manager.KeyManager;
@@ -39,10 +40,11 @@ public class PausadoState extends AbstractGameState {
     }
 
     @Override
-    public void handleInput() {
+    public Command handleInput() {
         if(KeyManager.isPressed(KeyManager.ESCAPE)) {
             gsm.setPaused(false);
             System.out.println("Keys.ESCAPE pressed - despausando juego ");
         }
+        return null;
     }
 }

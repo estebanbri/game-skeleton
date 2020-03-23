@@ -1,5 +1,6 @@
 package com.state;
 
+import com.entity.command.Command;
 import com.manager.AssetManager;
 import com.manager.StateManager;
 import com.manager.KeyManager;
@@ -37,7 +38,7 @@ public class MenuState extends AbstractGameState {
     }
 
     @Override
-    public void handleInput() {
+    public Command handleInput() {
         if(KeyManager.isPressed(KeyManager.DOWN) && (currentOpcion < options.length - 1)){
                 currentOpcion++;
         }
@@ -47,6 +48,7 @@ public class MenuState extends AbstractGameState {
         if(KeyManager.isPressed(KeyManager.ENTER)){
             selectOption();
         }
+        return null;
     }
 
     private void selectOption() {

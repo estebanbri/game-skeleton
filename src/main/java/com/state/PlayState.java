@@ -2,6 +2,11 @@ package com.state;
 
 import com.component.Position;
 import com.entity.Player;
+import com.entity.command.Command;
+import com.entity.command.impl.DownCommand;
+import com.entity.command.impl.LeftCommand;
+import com.entity.command.impl.RightCommand;
+import com.entity.command.impl.UpCommand;
 import com.main.GamePanel;
 import com.manager.StateManager;
 import com.manager.KeyManager;
@@ -11,6 +16,10 @@ import java.awt.*;
 public class PlayState extends AbstractGameState {
 
     private Player player;
+    private Command leftCommand;
+    private Command rightCommand;
+    private Command upCommand;
+    private Command downCommand;
 
     public PlayState(StateManager gsm) {
         super(gsm);
@@ -20,11 +29,18 @@ public class PlayState extends AbstractGameState {
     public void init() {
         player = new Player();
         player.setPosition(new Position(17,17));
+        leftCommand = new LeftCommand();
+        rightCommand = new RightCommand();
+        upCommand = new UpCommand();
+        downCommand = new DownCommand();
     }
 
     @Override
     public void update() {
-        handleInput();
+        Command commmand = handleInput();
+        if(commmand != null){
+            commmand.execute(player);
+        }
         player.update(); // actualiza el conjunto de imagenes dependiendo de la tecla pulsada y hace el movimiento
     }
 
@@ -36,10 +52,13 @@ public class PlayState extends AbstractGameState {
     }
 
     @Override
-    public void handleInput() {
-        if(KeyManager.isDown(KeyManager.LEFT)) player.left();
-        if(KeyManager.isDown(KeyManager.RIGHT)) player.rigth();
-        if(KeyManager.isDown(KeyManager.UP)) player.up();
-        if(KeyManager.isDown(KeyManager.DOWN)) player.down();
+    public Command handleInput() {
+        if(KeyManager.isDown(KeyManager.LEFT)) return leftCommand;
+        if(KeyManager.isDown(KeyManager.RIGHT)) return rightCommand;
+        if(KeyManager.isDown(KeyManager.UP)) return upCommand;
+        if(KeyManager.isDown(KeyManager.DOWN)) return downCommand;
+
+        // Nothing Pressed
+        return null;
     }
 }

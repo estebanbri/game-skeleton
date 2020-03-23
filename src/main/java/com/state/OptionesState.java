@@ -1,5 +1,6 @@
 package com.state;
 
+import com.entity.command.Command;
 import com.main.GamePanel;
 import com.manager.StateManager;
 
@@ -30,9 +31,8 @@ public class OptionesState extends AbstractGameState {
     }
 
     @Override
-    public void handleInput() {
-
-
+    public Command handleInput() {
+        return null;
     }
 }
 

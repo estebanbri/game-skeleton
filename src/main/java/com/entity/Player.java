@@ -4,7 +4,7 @@ import com.manager.AssetManager;
 
 import java.awt.image.BufferedImage;
 
-public class Player extends Entity {
+public class Player extends GameActor {
 
   // sprites
   private BufferedImage[] downSprites;

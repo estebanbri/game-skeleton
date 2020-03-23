@@ -1,5 +1,6 @@
 package com.state;
 
+import com.entity.command.Command;
 import com.manager.StateManager;
 
 import java.awt.*;
@@ -26,7 +27,7 @@ public class GameOverState extends AbstractGameState {
     }
 
     @Override
-    public void handleInput() {
-
+    public Command handleInput() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.state;
 
+import com.entity.command.Command;
 import com.main.GamePanel;
 import com.manager.StateManager;
 import com.manager.KeyManager;
@@ -46,9 +47,10 @@ public class IntroState extends AbstractGameState {
     }
 
     @Override
-    public void handleInput() {
+    public Command handleInput() {
         if(KeyManager.isPressed(KeyManager.ENTER)) {
             gsm.changeState(StateManager.MENU);
         }
+        return null;
     }
 }
