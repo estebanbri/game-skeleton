@@ -25,7 +25,7 @@ public class PlayState extends AbstractGameState {
     @Override
     public void update() {
         handleInput();
-        player.update(); // actualiza el conjunto de imagenes dependiendo de la tecla pulsada
+        player.update(); // actualiza el conjunto de imagenes dependiendo de la tecla pulsada y hace el movimiento
     }
 
     @Override
